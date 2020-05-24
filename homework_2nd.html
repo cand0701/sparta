@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <title>Document</title>
+    <link href="https://fonts.googleapis.com/css2?family=Stylish&display=swap" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <style>
+        .wrap {
+            width: 900px;
+            margin: auto;
+            padding: 20px;
+            font-family: 'Stylish', sans-serif;
+
+        }
+
+        .btn_order {
+            width: 100px;
+            margin: auto;
+        }
+        .blue {
+            color:blue;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="wrap">
+
+        <div class="card">
+            <img class="card-img-center"
+                src="https://image.kyobobook.co.kr/newimages/giftshop_new/goods/400/1107/S1557729408054.jpg"
+                alt="Card image cap">
+            <div class="card-body">
+                <h2 class="card-title">우드 티라이트 캔들 양초 <small><a style="font-weight: bold; color: red; "> 가격 : 1,000,000
+                            원/개</a></small></h2>
+                <p class="card-text">초는 파라핀이나 밀랍 등으로 된 고체 연료와 심지로 이루어진 광원 또는 연료를 말한다. 촛불을 켜기 위하여 만들어졌으며, 서양식 초를 양초라고
+                    부른다. 19세기 이전까지 양초는 대개 우지로
+                    만들었으나, 오늘날은 대부분 파라핀을 원료로 만들어진다.</p>
+                <p class="blue" id = "currency"></p>
+                <h2 class="card-title">주문하기</h2>
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="basic-addon1">주문자이름</span>
+                    </div>
+                    <input type="text" class="form-control" id="txt_name" placeholder="" aria-label="Username"
+                        aria-describedby="basic-addon1">
+                </div>
+
+
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <label class="input-group-text" for="inputGroupSelect01">수량</label>
+                    </div>
+                    <select class="custom-select" id="inputGroupSelect01">
+                        <option value="" selected>----수량을 선택하세요----</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                    </select>
+                </div>
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="basic-addon1">주소</span>
+                    </div>
+                    <input type="text" class="form-control" id="txt_addr" placeholder="" aria-label="Username"
+                        aria-describedby="basic-addon1">
+                </div>
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="basic-addon1">전화번호</span>
+                    </div>
+                    <input type="text" class="form-control" id="txt_numbers" placeholder="" aria-label="Username"
+                        aria-describedby="basic-addon1">
+                </div>
+                <div class="btn_order" onclick="order()"><a class="btn btn-primary">주문하기</a></div>
+
+            </div>
+
+        </div>
+    </div>
+    <script>
+        function order() {
+            let name = $("#txt_name").val();
+            let count = $("#inputGroupSelect01").val();
+            let address = $("#txt_addr").val();
+            let numbers = $("#txt_numbers").val();
+            if (name == "") {
+                alert("주문자 이름을 입력하세요");
+            } else if (count == "") {
+                alert("수량을 선택하세요");
+            } else if ( address == "") {
+                alert("주소를 입력하세요");
+            } else if (numbsers == "") {
+                alert("전화번호를 입력하세요");
+            }
+            // console.log($("#txt_name").val());
+            // alert($"#txt_name");
+        }
+        $.ajax({
+            type: "GET",
+            url: "https://api.manana.kr/exchange/rate.json",
+            data: {},
+            success: function(response) {
+                let usd_krw = response[1]["rate"];
+                $("#currency").text(`달러-원 환율 : ${usd_krw}`);
+                // console.log(response[1]["rate"]);
+            }
+        })
+    </script>
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+
+</body>
+
+</html>
+
+<script>
+    function init() {
+        console.log("양초사러오신걸 환영합니다.");
+    }
+
+</script>
